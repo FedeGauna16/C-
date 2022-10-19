@@ -100,46 +100,37 @@ int mapSize(Map<K,V> m)
 template<typename K,typename V>
 bool mapHasNext(Map<K,V> m)
 {
-   return (m.cont<mapSize(m))?true:false;
+
+   return true;
 }
 
 template<typename K,typename V>
 K mapNextKey(Map<K,V>& m)
 {
    K k;
-   K* dir = arrayGet<K>(m.keys, m.cont);
-   k = *dir;
-   m.cont++;
-
    return k;
 }
 
 template<typename K,typename V>
 V* mapNextValue(Map<K,V>& m)
 {
-	V* v = arrayGet<V>(m.values, m.cont);
-	m.cont++;
-
-   return v;
+   return NULL;
 }
 
 template<typename K,typename V>
 void mapReset(Map<K,V>& m)
 {
-	m.cont = 0;
 }
 
 template<typename K,typename V>
 void mapSortByKeys(Map<K,V>& m,int cmpKK(K,K))
 {
-	//arraySort<K>(m.keys, cmpKK(K,K));
+	arraySort<K>(m.keys, cmpKK(K,K));
 }
 
 template<typename K,typename V>
 void mapSortByValues(Map<K,V>& m,int cmpVV(V,V))
 {
-	//arraySort<V>(m.values, cmpVV(V,V));
-
 }
 
 #endif
