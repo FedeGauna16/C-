@@ -38,7 +38,19 @@ Map<int,RCiudad> subirCiudades()
 
 Map<int,RVuelo> subirVuelos()
 {
-   return {};
+	FILE* f = fopen("VUELOS.dat", "r+b");
+	Map<int,RVuelo> ret = map<int,RVuelo>();
+
+	Vuelo v = read<Vuelo>(f);
+	while(!feof(f))
+	{
+		RVuelo x = rVuelo(v,0,0);
+		mapPut<int,RVuelo>(ret,v.idVue,x);
+		v = read<Vuelo>(f);
+	}
+
+	fclose(f);
+   return ret;
 }
 
 void procesar(Reserva r,Map<int,RCiudad>& mCiu,Map<int,RVuelo>& mVue,Map<int,int>& mCli)
@@ -80,6 +92,13 @@ void procesar(Reserva r,Map<int,RCiudad>& mCiu,Map<int,RVuelo>& mVue,Map<int,int
 
 void punto1(Map<int,RCiudad> mCiu)
 {
+	mapReset<int, RCiudad>(mCiud);
+	while(mapHasNext<int,RCiudad>(mCiu))
+	{
+		RCiudad* x = mapNextValue<int,RCiudad>(mCiu);
+		int cont = x->cont;
+		cout << "La cantidad de veces que se eligio: " << cont << endl;
+	}
 }
 
 void punto2(Map<int,RVuelo> mVue)
@@ -97,6 +116,12 @@ void punto2(Map<int,RVuelo> mVue)
 
 void punto3(Map<int,int> mCli)
 {
+	mapReset<int, int>(mCli);
+	while(mapHasNext<int,int>(mCli))
+	{
+		int cant = mapNextValue<int,int>(mCli);
+		cout << "La cantidad de millas: " << cant << endl;
+	}
 }
 
 int main()

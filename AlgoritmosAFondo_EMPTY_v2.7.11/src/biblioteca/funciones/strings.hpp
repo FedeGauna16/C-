@@ -199,6 +199,7 @@ int charToInt(char c)
 
 char intToChar(int i)
 {
+
 	if(0 <= i && i <= 9)
 	{
 		return i + 48;
